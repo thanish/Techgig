@@ -1,11 +1,11 @@
-This is part of the techgig code gladiator semi-final round machine learning contest
+This was part of the techgig code gladiator semi-final round machine learning contest
 
-I was the leader of team named 'Let's teach the machine' with Rajesh Vaswani as team member
+I was part of the team named 'Let's teach the machine' along with Rajesh Vaswani as the team member
 
-The data was about the Investment details of the customers. The problem statement was to predict whether a particular invesment advisor 
-with purchase or redeem a particular investment. 
+The theme was about the Investment details of the customers. The problem statement was to predict whether a particular invesment advisor 
+will purchase or redeem a particular investment. 
 
-The data shared included the transcation details, Investment experience, the activity of the investment advisors.
+The data shared included the transcation details, Investment experience and the activity of the investment advisors.
 
 We built a random forest model which gave us 2nd position in the leaderboard when the competition concluded.
 
