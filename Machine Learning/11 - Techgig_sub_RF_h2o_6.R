@@ -1,9 +1,4 @@
-#Office
-setwd('D:\\Thanish\\D\\Thanish Folder\\Compeditions\\Techgig\\ML')
-
-#Laptop
-setwd('E:\\Thanish\\Data science\\Techgig\\ML')
-
+#Reading the files
 transaction = read.csv('Code-Gladiators-Transaction.csv')
 Inv_exp = read.csv('Code-Gladiators-InvestmentExperience.csv')
 activity = read.csv('Code-Gladiators-Activity.csv')
@@ -17,7 +12,7 @@ str(test)
 #Extracing only the unique values in activity
 activity = activity[!duplicated(activity[,c('Unique_Advisor_Id','Month')]),]
 
-#Seperating year and month
+#Separating year and month
 transaction$Year = as.numeric(substr(transaction$Month, start= 1, stop= 4))
 transaction$Month = as.numeric(substr(transaction$Month, start= 8, stop= 9))
 Inv_exp$Year = as.numeric(substr(Inv_exp$Month, start= 1, stop= 4))
@@ -61,7 +56,7 @@ str(train_test_prod)
 
 nrow(train_test_prod)
 
-#Dropping few columns factor columns
+#Dropping off the factor columns
 train_test_prod$Morningstar.Category = NULL
 train_test_prod$Investment = NULL
 str(train_test_prod)
@@ -112,5 +107,3 @@ sub_RF_H2o = data.frame(Unique_Advisor_Id= test_prod$Unique_Advisor_Id,
                         Redeem_Status= RF.prod.pred_sum)
 
 write.csv(sub_RF_H2o, row.names = F, '11-sub_RF_h2o_6.csv')
-
-
