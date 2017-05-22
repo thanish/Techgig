@@ -1,8 +1,9 @@
-setwd('D:\\Thanish\\D\\Thanish Folder\\Compeditions\\Techgig\\Big data')
-
+#Reading the files
 train_prod = read.csv('train_data.csv')
 test_prod = read.csv('test_data.csv')
 str(train_prod)
+
+saveRDS(test_prod, 'test_prod.rds')
 
 #Dropping the blanks in the train prod
 train_prod = train_prod[!is.na(train_prod$is_fraud),]
@@ -39,6 +40,7 @@ split = sample(nrow(train_prod), 0.6*nrow(train_prod), replace = F)
 train_local = train_prod[split,]
 test_local = train_prod[-split,]
 
+#Converting the target column to be factors
 train_local$is_fraud = as.factor(train_local$is_fraud)
 test_local$is_fraud = as.factor(test_local$is_fraud)
 
@@ -70,6 +72,7 @@ gbm.prod.pred = h2o.predict(gbm.model.local, newdata = test_prod_h2o)
 gbm.prod.pred = as.data.frame(gbm.prod.pred)
 
 gbm.prod.pred_sum = ifelse(gbm.prod.pred$p1>0.5, 1, 0)
+test_prod = readRDS('test_prod.rds')
 sub_gbm_H2o = cbind(test_prod, 
                     fraud_click_probability = gbm.prod.pred$p1,	
                     is_fraud = gbm.prod.pred_sum)
