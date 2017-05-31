@@ -20,8 +20,21 @@ colnames(train_prod) = colnames(test_prod)
 #Combining the train and test
 train_test_prod = rbind(train_prod, test_prod)
 
+#Converting Date feature
+train_test_prod$Date = substr(train_test_prod$click_time, start = 1, stop = 10)
+train_test_prod$Day = as.numeric(substr(train_test_prod$Date, start = 9, stop = 10))
+train_test_prod$Time = substr(train_test_prod$click_time, start = 12, stop = 23)
+train_test_prod$Hour = as.numeric(substr(train_test_prod$Time, start = 1, stop = 2))
+train_test_prod$Minute = as.numeric(substr(train_test_prod$Time, start = 4, stop = 5))
+
+#Dropping of the column 
+train_test_prod$click_time = NULL
+train_test_prod$Date = NULL
+train_test_prod$Time = NULL
+
 #Extracting only the factor features
 fac_columns = colnames(train_test_prod)[sapply(train_test_prod, class)=='factor']
+fac_columns = setdiff(fac_columns,'is_fraud')
 
 #Dropping the factor as of now
 train_test_prod = train_test_prod[,setdiff(colnames(train_test_prod),fac_columns)]
