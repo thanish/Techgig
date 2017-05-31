@@ -3,8 +3,6 @@ train_prod = read.csv('train_data.csv')
 test_prod = read.csv('test_data.csv')
 str(train_prod)
 
-saveRDS(test_prod, 'test_prod.rds')
-
 #Dropping the blanks in the train prod
 train_prod = train_prod[!is.na(train_prod$is_fraud),]
 str(train_prod)
@@ -75,7 +73,6 @@ gbm.model.local = h2o.gbm(x = x_indep, y = y_dep,
 gbm.local.pred = h2o.predict(gbm.model.local, newdata = test_local_h2o)
 gbm.local.pred = as.data.frame(gbm.local.pred)
 gbm_table = table(gbm.local.pred$p1>0.5, test_local$is_fraud)
-gbm_table = table(gbm.local.pred$predict, test_local$is_fraud)
 sum(diag(gbm_table))/nrow(test_local)
 
 h2o.varimp_plot(gbm.model.local)
